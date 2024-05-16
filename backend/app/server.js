@@ -3,6 +3,9 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const cors = require("cors");
+const nodemailer = require("nodemailer");
+const randomstring = require("randomstring");
+const nodemon = require("nodemon");
 
 const app = express();
 const PORT = 3000;
@@ -31,13 +34,47 @@ const UserSchema = new mongoose.Schema({
   password: { type: String, required: true },
 });
 const User = mongoose.model("User", UserSchema);
-
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: { user: "shamyugthakr@gmail.com", pass: "srmcxeijfpuikyop" },
+});
 // Routes
 app.post("/register", async (req, res) => {
   try {
     const { name, email, password } = req.body;
     const existingEmail = await User.findOne({ email });
     if (existingEmail) return res.status(401).send("Email already exists");
+    const verificationcode = randomstring.generate({
+      length: 6,
+      charset: "numeric",
+    });
+
+    const mailoptions = {
+      from: "shamygthakr@gmail.com",
+      to: email,
+      subject: "email verification code",
+      text: `verification code is ${verificationcode}`,
+    };
+    transporter.sendMail(mailoptions, (error, info) => {
+      if (error) {
+        console.error(error);
+        res.status(500).send("Error in sending email");
+      } else {
+        console.log("Email sent" + info.response);
+        res.send("Email sent sccessfully");
+      }
+    });
+
+    res.json({ verificationcode });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error registering user");
+  }
+});
+app.post("/verify", async (req, res) => {
+  try {
+    const { name, email, password } = req.body;
+
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({ name, email, password: hashedPassword });
     await newUser.save();
@@ -47,7 +84,6 @@ app.post("/register", async (req, res) => {
     res.status(500).send("Error registering user");
   }
 });
-
 app.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -59,7 +95,9 @@ app.post("/login", async (req, res) => {
       { id: user._id },
       "c8de6e0d29803932903508407019bdc5e16120968749131461bc80ef3c025ab4"
     );
-    res.json({ token });
+    const userName = user.name;
+    const userEmail = user.email;
+    res.json({ token, userName, userEmail });
   } catch (err) {
     console.error(err);
     res.status(500).send("Server error");

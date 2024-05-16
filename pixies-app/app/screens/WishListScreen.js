@@ -11,6 +11,7 @@ import {
   useWindowDimensions,
 } from "react-native";
 import React from "react";
+import StarRate from "../components/StarRate";
 
 import {
   Entypo,
@@ -153,24 +154,18 @@ const WishListScreen = ({ navigation }) => {
                     </Text>
                   </View>
 
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      backgroundColor: "green",
-                      borderRadius: 5,
-                      width: 40,
-                      paddingVertical: 3,
-                      paddingHorizontal: 3,
-                    }}
-                  >
+                  <View>
                     <Text
                       style={{
                         fontSize: 10,
                         color: "white",
                       }}
                     >
-                      <Entypo name="star" size={10} color="white" />{" "}
-                      {item.rating}
+                      <StarRate
+                        rating={item.rating}
+                        starSize={12}
+                        fullStarColor={"#fd5780"}
+                      />
                     </Text>
                   </View>
                   <View
@@ -202,6 +197,7 @@ const WishListScreen = ({ navigation }) => {
                         marginLeft: 5,
                       }}
                       carttext={13}
+                      dealId={item.id}
                     />
                   </View>
                 </View>

@@ -28,6 +28,7 @@ Water/Aqua/Eau, Glycerin, 2,3-Butanediol, 1,2-Hexanediol, Cetyl Ethylhexanoate, 
 
     additionalInfo: `Manufacturer:  Give Back Beauty LLC
 Address:  Give Back Beauty LLC 8 The Green, Suite #4220 Dover, Delaware, 199001 USA`,
+    cart: false,
   },
   {
     id: "1",
@@ -53,6 +54,7 @@ A cult-fave lip gloss, now with pure, creamy color and incredible shine, that in
     ingredients: `Polybutene, octyldodecanol, mica, silica dimethyl silylate, caprylic/capric triglyceride, silica silylate, dicalcium phosphate, glyceryl behenate/eicosadioate, stearalkonium bentonite, aroma/flavor, pentaerythrityl tetra-di-t-butyl hydroxyhydrocinnamate, propylene carbonate, calcium aluminum borosilicate, aluminum calcium sodium silicate, calcium titanium borosilicate, alumina, calcium sodium borosilicate, caesalpinia sappan bark extract, silica, synthetic fluorphlogopite, tin oxide, [+/-:titanium dioxide (ci 77891), red 7 lake (ci 15850), iron oxides (ci 77491, ci 77492, ci 77499), blue 1 lake (ci 42090), yellow 5 lake (ci 19140)].`,
     additionalInfo: `Manufacturer: Kylie Cosmetics
 Address: 425 Market Street, 19Th Floor, San Francisco , California, United States`,
+    cart: false,
   },
   {
     id: "2",
@@ -78,6 +80,7 @@ Mid: Creme de Coconut, Pink Rose Petals
 Base: Macaroon Sugar, Velvet Musk`,
     additionalInfo: `Manufacturer:  Ariana Grande Fragrances
 Address: Fapagau Et Compagnie 4, Rue Jules Vercruysse Fr-02430 Gauchy, France`,
+    cart: false,
   },
   {
     id: "3",
@@ -100,6 +103,7 @@ Address: Fapagau Et Compagnie 4, Rue Jules Vercruysse Fr-02430 Gauchy, France`,
 
     additionalInfo: `Manufacturer & Packer Name and Address:- L’Oréal S.A, Productos Capilares, Calle López Bravo, 78, Polígono Industrial Villalonquéjar, 09001 Burgos, Spain.
  Importer name and Address:- L'Oréal India Pvt Ltd, A Wing, 8th Floor, Marathon Futurex, N M Joshi Marg, Lower Parel, Mumbai, India, 400013`,
+    cart: false,
   },
   {
     id: "4",
@@ -132,6 +136,7 @@ The results? Smooth, soft, healthy-looking waves that just won’t quit.`,
 Address: United States: TYMO Beauty Inc. 663 Brea Canyon Road, Suite 4, Walnut CA , 91789
 
 Hong Kong SAR: TYMO Beauty Limited, Flat B07, Floor23, Hover Industrial Building, No.26-38 Kwai Cheong Road. NT, Hong Kong`,
+    cart: false,
   },
   {
     id: "5",
@@ -155,6 +160,7 @@ Recycled polyester
 Recycled polyester is polyester made from PET bottles or end-of-life textile waste. The PET bottles or textile waste is mechanically recycled and processed into new yarn.`,
     additionalInfo: `Manufacturer: H & M Hennes & Mauritz Retail Private Limited
 Address: Prakhhyat Infraprojects PVT. LTD., BUILDING 6, K-Square Logistics Park C/O LF LogisticsNear Padgha Toll Naka on MUMBAI-NASIKThane , Maharashtra - 421101`,
+    cart: false,
   },
   // {
   //   id: "",

@@ -9,7 +9,7 @@ import {
   useWindowDimensions,
   ScrollView,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { deals } from "../data/DealsData";
 
 import {
@@ -22,12 +22,32 @@ import {
 } from "@expo/vector-icons";
 import Like from "../components/Like";
 import Addtocart from "../components/Addtocart";
+import StarRate from "../components/StarRate";
+import Share_btn from "../components/Share_btn";
+
+const DotIndicator = ({ dataLength, currentIndex }) => {
+  const dots = Array.from({ length: dataLength }, (_, index) => index);
+  return (
+    <View style={styles.indicaorContainer}>
+      {dots.map((dotIndex) => (
+        <View
+          key={dotIndex}
+          style={[
+            styles.dot,
+            dotIndex === currentIndex ? styles.activeDot : null,
+          ]}
+        />
+      ))}
+    </View>
+  );
+};
 
 const ProductScreen = ({ route }) => {
   const { id } = route.params;
   const selectedIndex = deals.findIndex((item) => item.id === id);
   const product = deals[selectedIndex];
   const screenwidth = useWindowDimensions("window").width;
+  const [currentIndex, setcurrentIndex] = useState(0);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -75,7 +95,7 @@ const ProductScreen = ({ route }) => {
           />
         </View>
       </View>
-      <ScrollView>
+      <ScrollView showsHorizontalScrollIndicator={false}>
         <FlatList
           data={product.carouselImages}
           renderItem={({ item }) => {
@@ -90,9 +110,25 @@ const ProductScreen = ({ route }) => {
               />
             );
           }}
+          onScroll={(event) => {
+            const { contentOffset, layoutMeasurement } = event.nativeEvent;
+            const currentIndex = Math.floor(
+              contentOffset.x / layoutMeasurement.width
+            );
+            setcurrentIndex(currentIndex);
+          }}
           horizontal={true}
           pagingEnabled={true}
+          showsHorizontalScrollIndicator={false}
         ></FlatList>
+        <View style={{ position: "relative", bottom: -20 }}>
+          <Share_btn />
+          <DotIndicator
+            dataLength={product.carouselImages.length}
+            currentIndex={currentIndex}
+          />
+        </View>
+
         <View>
           <Text
             style={{
@@ -125,23 +161,18 @@ const ProductScreen = ({ route }) => {
               marginTop: 10,
             }}
           >
-            <View
-              style={{
-                flexDirection: "row",
-                backgroundColor: "green",
-                borderRadius: 5,
-                width: 48,
-                paddingVertical: 3,
-                paddingHorizontal: 3,
-              }}
-            >
+            <View>
               <Text
                 style={{
-                  fontSize: 13,
+                  fontSize: 10,
                   color: "white",
                 }}
               >
-                <Entypo name="star" size={15} color="white" /> {product.rating}
+                <StarRate
+                  rating={product.rating}
+                  starSize={20}
+                  fullStarColor={"#fd5780"}
+                />
               </Text>
             </View>
             <Text style={{ padding: 10, color: "#bbb9b9", fontSize: 15 }}>
@@ -434,5 +465,26 @@ const styles = StyleSheet.create({
   logoname: {
     width: 80,
     height: 38.4,
+  },
+  indicaorContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    position: "absolute",
+    left: 0,
+    right: 0,
+  },
+  dot: {
+    width: 6,
+    height: 6,
+    borderRadius: 4,
+    backgroundColor: "rgba(145,145,145,0.5)",
+    marginHorizontal: 4,
+  },
+  activeDot: {
+    width: 6,
+    height: 6,
+
+    backgroundColor: "#fd5780",
   },
 });

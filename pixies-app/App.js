@@ -4,11 +4,14 @@ import StackNavigator from "./app/navigation/StackNavigator.js";
 import LoginScreen from "./app/screens/LoginScreen";
 import { Provider } from "react-redux";
 import store from "./app/redux/store.js";
+import { AppProvider } from "./app/components/AppContext.js";
 
 export default function App() {
   return (
     <Provider store={store}>
-      <StackNavigator />
+      <AppProvider>
+        <StackNavigator />
+      </AppProvider>
     </Provider>
   );
 }

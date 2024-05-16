@@ -20,7 +20,7 @@ const WishList = () => {
       />
     </Pressable>
   );
-};
+}; 
 
 export default WishList;
 

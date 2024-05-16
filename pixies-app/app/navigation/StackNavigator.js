@@ -10,6 +10,7 @@ import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
 import ProductScreen from "../screens/ProductScreen";
 import WishListScreen from "../screens/WishListScreen";
 import CartScreen from "../screens/CartScreen";
+import VerificationScreen from "../screens/VerificationScreen";
 
 const StackNavigator = () => {
   const Stack = createNativeStackNavigator();
@@ -88,6 +89,11 @@ const StackNavigator = () => {
         <Stack.Screen
           name="Register"
           component={RegisterScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Verify"
+          component={VerificationScreen}
           options={{ headerShown: false }}
         />
         <Stack.Screen

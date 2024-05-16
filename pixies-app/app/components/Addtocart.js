@@ -5,18 +5,20 @@ import {
   Pressable,
   TouchableNativeFeedbackBase,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
-import { toggleCart } from "../redux/reducers/cartSlice.js";
+import { toggleCart } from "../redux/reducers/cartSlice";
 import { useSelector, useDispatch } from "react-redux";
+import { AppContext } from "./AppContext";
 
 const Addtocart = ({ customcart, bagsize, carttext, dealId }) => {
-  const { cart } = useSelector((state) =>
-    state.deals.dealsList.find((item) => item.id === dealId)
+  const { cart } = useSelector(
+    (state) => state.cart.dealsList.find((item) => item.id === dealId) || {}
   );
   const dispatch = useDispatch();
+  const { userEmail } = useContext(AppContext);
   const handleCartPress = () => {
-    dispatch(toggleCart({ id: dealId }));
+    dispatch(toggleCart({ id: dealId, userEmail }));
   };
   return (
     <Pressable
@@ -30,7 +32,7 @@ const Addtocart = ({ customcart, bagsize, carttext, dealId }) => {
       ]}
     >
       {cart ? (
-        <View>
+        <View style={{ flexDirection: "row" }}>
           <Text
             style={{
               textAlign: "center",
@@ -39,12 +41,17 @@ const Addtocart = ({ customcart, bagsize, carttext, dealId }) => {
               fontSize: carttext,
             }}
           >
-            Add to Cart
+            Remove from Bag
           </Text>
-          <Ionicons name="location-outline" size={15} color="rgba(0,0,0,0.9)" />
+          <Ionicons
+            name="bag-handle-outline"
+            size={bagsize}
+            color="white"
+            style={{ marginHorizontal: 15 }}
+          />
         </View>
       ) : (
-        <View>
+        <View style={{ flexDirection: "row" }}>
           <Text
             style={{
               textAlign: "center",
@@ -53,9 +60,14 @@ const Addtocart = ({ customcart, bagsize, carttext, dealId }) => {
               fontSize: carttext,
             }}
           >
-            Added to Cart
+            Add to Bag
           </Text>
-          <Ionicons name="location-outline" size={15} color="rgba(0,0,0,0.9)" />
+          <Ionicons
+            name="bag-handle-outline"
+            size={bagsize}
+            color="white"
+            style={{ marginHorizontal: 15 }}
+          />
         </View>
       )}
     </Pressable>

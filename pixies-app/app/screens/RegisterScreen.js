@@ -17,22 +17,43 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import YupValidation from "../components/YupValidatiom";
 
 const RegisterScreen = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({});
   const navigation = useNavigation();
   const handleRegister = async () => {
     try {
-      const response = await axios.post("http://172.17.26.124:3000/register", {
+      await YupValidation.validate(
+        { name, email, password },
+        { abortEarly: false }
+      );
+      const response = await axios.post(`http://192.168.1.7:3000/register`, {
         name: name,
         email: email,
         password: password,
       });
-      navigation.navigate("Main");
+      const { verificationcode } = response.data;
+
+      navigation.navigate("Verify", {
+        name,
+        email,
+        password,
+        verificationcode,
+      });
     } catch (error) {
-      console.error(error);
+      if (error.name === "ValidationError") {
+        let validationError = {};
+        error.inner.forEach((err) => {
+          validationError[err.path] = err.message;
+        });
+        setErrors(validationError);
+      } else {
+        console.log(error);
+      }
     }
   };
 
@@ -68,7 +89,7 @@ const RegisterScreen = () => {
           style={styles.inputText}
         />
       </View>
-
+      {errors.name && <Text style={{ color: "red" }}> {errors.name} </Text>}
       <View style={styles.inputcontainer}>
         <MaterialIcons
           name="email"
@@ -84,7 +105,7 @@ const RegisterScreen = () => {
           style={styles.inputText}
         />
       </View>
-
+      {errors.email && <Text style={{ color: "red" }}> {errors.email} </Text>}
       <View style={styles.inputcontainer}>
         <MaterialIcons
           name="password"
@@ -101,7 +122,9 @@ const RegisterScreen = () => {
           style={styles.inputText}
         />
       </View>
-
+      {errors.password && (
+        <Text style={{ color: "red" }}> {errors.password} </Text>
+      )}
       <View style={styles.links}>
         <Text style={styles.policy}>
           By signing up, you agree to our

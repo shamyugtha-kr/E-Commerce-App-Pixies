@@ -26,6 +26,7 @@ import { useNavigation } from "@react-navigation/native";
 import Addtocart from "../components/Addtocart";
 import WishList from "../components/WishList";
 import Cart from "../components/Cart";
+import StarRate from "../components/StarRate";
 
 const HomeScreen = ({ navigation }) => {
   const screenwidth = useWindowDimensions("window").width;
@@ -217,24 +218,18 @@ const HomeScreen = ({ navigation }) => {
                     </Text>
                   </View>
 
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      backgroundColor: "green",
-                      borderRadius: 5,
-                      width: 40,
-                      paddingVertical: 3,
-                      paddingHorizontal: 3,
-                    }}
-                  >
+                  <View>
                     <Text
                       style={{
                         fontSize: 10,
                         color: "white",
                       }}
                     >
-                      <Entypo name="star" size={10} color="white" />{" "}
-                      {item.rating}
+                      <StarRate
+                        rating={item.rating}
+                        starSize={12}
+                        fullStarColor={"#fd5780"}
+                      />
                     </Text>
                   </View>
                   <View

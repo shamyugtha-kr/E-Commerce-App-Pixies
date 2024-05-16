@@ -1,21 +1,22 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { toggleLike, toggleWishlist } from "../redux/reducers/dealSlice";
 import { useSelector, useDispatch } from "react-redux";
+import { AppContext } from "./AppContext";
 
 const Like = ({ customStyle, likesize, dealId }) => {
-  const { like } = useSelector((state) =>
+  const { wishlisted } = useSelector((state) =>
     state.deals.dealsList.find((item) => item.id === dealId)
   );
   const dispatch = useDispatch();
+  const { userEmail } = useContext(AppContext);
   const handleLikePress = () => {
-    dispatch(toggleLike({ id: dealId }));
-    dispatch(toggleWishlist({ id: dealId }));
+    dispatch(toggleWishlist({ id: dealId, userEmail }));
   };
   return (
     <Pressable onPress={handleLikePress} style={[customStyle, {}]}>
-      {like ? (
+      {wishlisted ? (
         <MaterialCommunityIcons
           name="cards-heart"
           size={likesize}

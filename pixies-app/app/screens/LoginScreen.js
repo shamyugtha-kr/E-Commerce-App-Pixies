@@ -12,24 +12,36 @@ import {
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { MaterialIcons, FontAwesome } from "@expo/vector-icons";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { AppContext } from "../components/AppContext";
+import { useDispatch } from "react-redux";
+import { loadcartdata } from "../redux/reducers/cartSlice";
+import { loadlikedata } from "../redux/reducers/dealSlice";
 
 const LoginScreen = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigation = useNavigation();
+  const { setUserName, setUserEmail } = useContext(AppContext);
+  const dispatch = useDispatch();
   const handleLogin = async () => {
     try {
-      const response = await axios.post("http://172.17.26.124:3000/login", {
+      const response = await axios.post(`http://192.168.1.7:3000/login`, {
         email: email,
         password: password,
       });
-      const { token } = response.data;
+      const { token, userName, userEmail } = response.data;
+
+      setUserName(userName);
+
+      setUserEmail(userEmail);
+      dispatch(loadcartdata(userEmail));
+      dispatch(loadlikedata(userEmail));
       await AsyncStorage.setItem("token", token);
       navigation.navigate("Main");
     } catch (error) {
