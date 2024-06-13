@@ -3,7 +3,7 @@ import { deals } from "../../data/DealsData";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const initialState = {
-  dealsList: deals,
+  cartList: deals,
 };
 
 const cartSlice = createSlice({
@@ -12,24 +12,64 @@ const cartSlice = createSlice({
   reducers: {
     toggleCart: (state, action) => {
       const { id, userEmail } = action.payload;
-      const item = state.dealsList.find((item) => item.id === id);
+      const item = state.cartList.find((item) => item.id === id);
       if (item) {
+        if (item.cart === false) {
+          item.quantity = 1;
+        } else {
+          item.quantity = 0;
+        }
         item.cart = !item.cart;
-        savecartdata(state.dealsList, userEmail);
+        savecartdata(state.cartList, userEmail);
       }
     },
     setcartdata: (state, action) => {
-      state.dealsList = action.payload;
+      state.cartList = action.payload;
+    },
+    incrementCount: (state, action) => {
+      const { id, userEmail } = action.payload;
+      const item = state.cartList.find((item) => item.id === id);
+      if (item) {
+        item.quantity = item.quantity + 1;
+        savecartdata(state.cartList, userEmail);
+      }
+    },
+    decrementCount: (state, action) => {
+      const { id, userEmail } = action.payload;
+      const item = state.cartList.find((item) => item.id === id);
+      if (item) {
+        if (item.quantity <= 1) {
+          item.quantity = 0;
+          item.cart = !item.cart;
+        } else {
+          item.quantity = item.quantity - 1;
+        }
+        savecartdata(state.cartList, userEmail);
+      }
+    },
+    resetCartItemsCount: (state, action) => {
+      const { userEmail } = action.payload;
+      state.cartList.forEach((item) => {
+        item.quantity = 0;
+        item.cart = false;
+      });
+      savecartdata(state.cartList, userEmail);
     },
   },
 });
 
-export const { toggleCart, setcartdata } = cartSlice.actions;
+export const {
+  toggleCart,
+  setcartdata,
+  incrementCount,
+  decrementCount,
+  resetCartItemsCount,
+} = cartSlice.actions;
 
-export const selectDealsList = (state) => state.cart.dealsList;
+export const selectcartList = (state) => state.cart.cartList;
 
-export const selectcartItems = createSelector(selectDealsList, (dealsList) =>
-  dealsList.filter((item) => item.cart)
+export const selectcartItems = createSelector(selectcartList, (cartList) =>
+  cartList.filter((item) => item.cart)
 );
 const savecartdata = async (cartdata, userEmail) => {
   try {

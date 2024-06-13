@@ -52,27 +52,6 @@ const WishListScreen = ({ navigation }) => {
             source={require("../assets/logoname.png")}
             style={styles.logoname}
           />
-          <Pressable style={styles.location}>
-            <Ionicons
-              name="location-outline"
-              size={15}
-              color="rgba(0,0,0,0.9)"
-            />
-            <Text
-              style={{
-                fontSize: 10.5,
-                color: "rgba(0,0,0,0.9)",
-                marginLeft: 3,
-              }}
-            >
-              City - Coimbatore 642126
-            </Text>
-            <MaterialIcons
-              name="keyboard-arrow-down"
-              size={15}
-              color="rgba(0,0,0,0.9)"
-            />
-          </Pressable>
         </View>
         <View
           style={{
@@ -220,8 +199,5 @@ const styles = StyleSheet.create({
   logoname: {
     width: 80,
     height: 38.4,
-  },
-  location: {
-    flexDirection: "row",
   },
 });

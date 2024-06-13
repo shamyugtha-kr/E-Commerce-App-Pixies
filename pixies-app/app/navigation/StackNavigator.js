@@ -11,6 +11,10 @@ import ProductScreen from "../screens/ProductScreen";
 import WishListScreen from "../screens/WishListScreen";
 import CartScreen from "../screens/CartScreen";
 import VerificationScreen from "../screens/VerificationScreen";
+import PaymentScreen from "../screens/PaymentScreen";
+import AccountScreen from "../screens/AccountScreen";
+import PageNotReady from "../screens/PageNotReady";
+import SearchResult from "../screens/SearchResult";
 
 const StackNavigator = () => {
   const Stack = createNativeStackNavigator();
@@ -54,7 +58,7 @@ const StackNavigator = () => {
         />
         <Tab.Screen
           name="Account"
-          component={HomeScreen}
+          component={AccountScreen}
           options={{
             tabBarLabel: "Account",
             tabBarLabelStyle: { color: "grey" },
@@ -114,6 +118,27 @@ const StackNavigator = () => {
         <Stack.Screen
           name="Cart"
           component={CartScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Payment"
+          component={PaymentScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="PageNotReady"
+          component={PageNotReady}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="SearchResult"
+          component={SearchResult}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Profile"
+          component={ProductScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

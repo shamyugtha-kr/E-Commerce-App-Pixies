@@ -11,11 +11,12 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import { deals } from "../data/DealsData";
+import WishList from "../components/WishList";
+import Cart from "../components/Cart";
 
 import {
   Ionicons,
   FontAwesome,
-  Entypo,
   MaterialIcons,
   Octicons,
   MaterialCommunityIcons,
@@ -59,7 +60,7 @@ const ProductScreen = ({ route }) => {
           alignItems: "center",
           marginLeft: 30,
           paddingTop: 15,
-          paddingBottom: 20,
+          paddingBottom: 15,
         }}
       >
         <View>
@@ -81,18 +82,9 @@ const ProductScreen = ({ route }) => {
             color="black"
             style={{ marginHorizontal: 15 }}
           />
-          <Ionicons
-            name="heart-outline"
-            size={24}
-            color="black"
-            style={{ marginHorizontal: 15 }}
-          />
-          <Ionicons
-            name="bag-handle-outline"
-            size={24}
-            color="black"
-            style={{ marginHorizontal: 15 }}
-          />
+
+          <WishList />
+          <Cart />
         </View>
       </View>
       <ScrollView showsHorizontalScrollIndicator={false}>
@@ -122,7 +114,6 @@ const ProductScreen = ({ route }) => {
           showsHorizontalScrollIndicator={false}
         ></FlatList>
         <View style={{ position: "relative", bottom: -20 }}>
-          <Share_btn />
           <DotIndicator
             dataLength={product.carouselImages.length}
             currentIndex={currentIndex}
@@ -130,17 +121,27 @@ const ProductScreen = ({ route }) => {
         </View>
 
         <View>
-          <Text
+          <View
             style={{
-              marginHorizontal: 15,
+              flexDirection: "row",
+              alignItems: "center",
               marginTop: 40,
-              fontSize: 20,
-              fontWeight: 600,
+              justifyContent: "space-between",
+              marginRight: 15,
             }}
           >
-            {" "}
-            {product.title}{" "}
-          </Text>
+            <Text
+              style={{
+                marginHorizontal: 15,
+                fontSize: 20,
+                fontWeight: 600,
+              }}
+            >
+              {" "}
+              {product.title}
+            </Text>
+            <Share_btn />
+          </View>
           <Text
             style={{
               marginHorizontal: 15,
@@ -425,6 +426,7 @@ const ProductScreen = ({ route }) => {
               lineHeight: 25,
               color: "grey",
               fontWeight: 500,
+              paddingBottom: 20,
             }}
           >
             {" "}
@@ -445,7 +447,18 @@ const ProductScreen = ({ route }) => {
         </View>
         <View>
           <Addtocart
-            customcart={{ width: "400%", alignItems: "center", height: 50 }}
+            bagsize={25}
+            carttext={20}
+            customcart={{
+              height: 50,
+              paddingVertical: 9,
+              fontSize: 50,
+              fontWeight: "500",
+              marginHorizontal: 0,
+              alignItems: "center",
+              width: 300,
+              justifyContent: "center",
+            }}
             dealId={product.id}
           />
         </View>

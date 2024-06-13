@@ -22,11 +22,14 @@ const VerificationScreen = ({ route }) => {
   const handleVerification = async () => {
     if (userCode === verificationcode) {
       try {
-        const response = await axios.post(`http://192.168.1.7:3000/verify`, {
-          name: name,
-          email: email,
-          password: password,
-        });
+        const response = await axios.post(
+          `http://192.168.118.203:3000/verify`,
+          {
+            name: name,
+            email: email,
+            password: password,
+          }
+        );
 
         Alert.alert("Success", "Email verified successfully", [
           { text: "OK", onPress: () => navigation.navigate("Main") },
@@ -43,11 +46,14 @@ const VerificationScreen = ({ route }) => {
 
   const handleRegister = async () => {
     try {
-      const response = await axios.post(`http://192.168.1.7:3000/register`, {
-        name: name,
-        email: email,
-        password: password,
-      });
+      const response = await axios.post(
+        `http://192.168.118.203:3000/register`,
+        {
+          name: name,
+          email: email,
+          password: password,
+        }
+      );
       const { verificationcode } = response.data;
       navigation.navigate("Verify", {
         name,

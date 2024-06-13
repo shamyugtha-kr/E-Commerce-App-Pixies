@@ -9,8 +9,10 @@ import {
   Image,
   FlatList,
   useWindowDimensions,
+  TouchableO,
+  TouchableOpacity,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 
 import {
   Ionicons,
@@ -30,8 +32,14 @@ import StarRate from "../components/StarRate";
 
 const HomeScreen = ({ navigation }) => {
   const screenwidth = useWindowDimensions("window").width;
+  const [searchQuery, setSearchQuery] = useState("");
   const productpress = (productid) => {
     navigation.navigate("Product", { id: productid });
+  };
+  const handleSearch = () => {
+    if (searchQuery !== "") {
+      navigation.navigate("SearchResult", { searchQuery });
+    }
   };
 
   return (
@@ -51,27 +59,6 @@ const HomeScreen = ({ navigation }) => {
             source={require("../assets/logoname.png")}
             style={styles.logoname}
           />
-          <Pressable style={styles.location}>
-            <Ionicons
-              name="location-outline"
-              size={15}
-              color="rgba(0,0,0,0.9)"
-            />
-            <Text
-              style={{
-                fontSize: 10.5,
-                color: "rgba(0,0,0,0.9)",
-                marginLeft: 3,
-              }}
-            >
-              City - Coimbatore 642126
-            </Text>
-            <MaterialIcons
-              name="keyboard-arrow-down"
-              size={15}
-              color="rgba(0,0,0,0.9)"
-            />
-          </Pressable>
         </View>
         <View
           style={{
@@ -93,11 +80,20 @@ const HomeScreen = ({ navigation }) => {
       </View>
       <View style={{ alignItems: "center" }}>
         <Pressable style={styles.search}>
-          <Ionicons name="search" size={24} color="#fd5780" />
+          <TouchableOpacity onPress={handleSearch}>
+            <Ionicons name="search" size={24} color="#fd5780" />
+          </TouchableOpacity>
+
           <TextInput
             placeholder="Search for Products"
-            style={{ color: "#9092a4", paddingLeft: 10 }}
-          ></TextInput>
+            placeholderTextColor={"rgba(0,0,0,0.3)"}
+            onChangeText={(text) => setSearchQuery(text)}
+            onSubmitEditing={handleSearch}
+            style={[
+              styles.text,
+              { marginLeft: 10, fontWeight: "500", width: "80%" },
+            ]}
+          />
         </Pressable>
       </View>
       <ScrollView>
@@ -256,7 +252,6 @@ const HomeScreen = ({ navigation }) => {
                       customcart={{
                         padding: 5,
                         borderRadius: 5,
-
                         justifyContent: "center",
                         width: 115,
                         marginLeft: 5,
@@ -296,8 +291,5 @@ const styles = StyleSheet.create({
   logoname: {
     width: 80,
     height: 38.4,
-  },
-  location: {
-    flexDirection: "row",
   },
 });

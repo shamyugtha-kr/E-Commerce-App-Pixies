@@ -29,6 +29,7 @@ Water/Aqua/Eau, Glycerin, 2,3-Butanediol, 1,2-Hexanediol, Cetyl Ethylhexanoate, 
     additionalInfo: `Manufacturer:  Give Back Beauty LLC
 Address:  Give Back Beauty LLC 8 The Green, Suite #4220 Dover, Delaware, 199001 USA`,
     cart: false,
+    quantity: 0,
   },
   {
     id: "1",
@@ -55,6 +56,7 @@ A cult-fave lip gloss, now with pure, creamy color and incredible shine, that in
     additionalInfo: `Manufacturer: Kylie Cosmetics
 Address: 425 Market Street, 19Th Floor, San Francisco , California, United States`,
     cart: false,
+    quantity: 0,
   },
   {
     id: "2",
@@ -81,6 +83,7 @@ Base: Macaroon Sugar, Velvet Musk`,
     additionalInfo: `Manufacturer:  Ariana Grande Fragrances
 Address: Fapagau Et Compagnie 4, Rue Jules Vercruysse Fr-02430 Gauchy, France`,
     cart: false,
+    quantity: 0,
   },
   {
     id: "3",
@@ -104,6 +107,7 @@ Address: Fapagau Et Compagnie 4, Rue Jules Vercruysse Fr-02430 Gauchy, France`,
     additionalInfo: `Manufacturer & Packer Name and Address:- L’Oréal S.A, Productos Capilares, Calle López Bravo, 78, Polígono Industrial Villalonquéjar, 09001 Burgos, Spain.
  Importer name and Address:- L'Oréal India Pvt Ltd, A Wing, 8th Floor, Marathon Futurex, N M Joshi Marg, Lower Parel, Mumbai, India, 400013`,
     cart: false,
+    quantity: 0,
   },
   {
     id: "4",
@@ -112,13 +116,13 @@ Address: Fapagau Et Compagnie 4, Rue Jules Vercruysse Fr-02430 Gauchy, France`,
     oldPrice: 3000.0,
     price: 2699.0,
     rating: 4.5,
-    image: require("../assets/products/appliances/curl.png"),
+    image: require("../assets/products/appliances/curl4.png"),
     carouselImages: [
-      require("../assets/products/appliances/curl.png"),
+      require("../assets/products/appliances/curl4.png"),
       require("../assets/products/appliances/curl1.png"),
       require("../assets/products/appliances/curl2.png"),
       require("../assets/products/appliances/curl3.png"),
-      require("../assets/products/appliances/curl4.png"),
+      require("../assets/products/appliances/curl.png"),
     ],
     description: `“Clamp, Rotate, Release ”, TYMO ROTA is that EASY for anyone even with zero hair style experience!Ends clamped, button pressed, consider your perfect bouncy curl is done!
 
@@ -137,6 +141,7 @@ Address: United States: TYMO Beauty Inc. 663 Brea Canyon Road, Suite 4, Walnut C
 
 Hong Kong SAR: TYMO Beauty Limited, Flat B07, Floor23, Hover Industrial Building, No.26-38 Kwai Cheong Road. NT, Hong Kong`,
     cart: false,
+    quantity: 0,
   },
   {
     id: "5",
@@ -161,6 +166,7 @@ Recycled polyester is polyester made from PET bottles or end-of-life textile was
     additionalInfo: `Manufacturer: H & M Hennes & Mauritz Retail Private Limited
 Address: Prakhhyat Infraprojects PVT. LTD., BUILDING 6, K-Square Logistics Park C/O LF LogisticsNear Padgha Toll Naka on MUMBAI-NASIKThane , Maharashtra - 421101`,
     cart: false,
+    quantity: 0,
   },
   // {
   //   id: "",

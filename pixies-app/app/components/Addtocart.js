@@ -13,7 +13,7 @@ import { AppContext } from "./AppContext";
 
 const Addtocart = ({ customcart, bagsize, carttext, dealId }) => {
   const { cart } = useSelector(
-    (state) => state.cart.dealsList.find((item) => item.id === dealId) || {}
+    (state) => state.cart.cartList.find((item) => item.id === dealId) || {}
   );
   const dispatch = useDispatch();
   const { userEmail } = useContext(AppContext);
@@ -39,15 +39,16 @@ const Addtocart = ({ customcart, bagsize, carttext, dealId }) => {
               color: "white",
               fontWeight: 500,
               fontSize: carttext,
+              marginRight: 10,
             }}
           >
-            Remove from Bag
+            Remove
           </Text>
           <Ionicons
             name="bag-handle-outline"
             size={bagsize}
             color="white"
-            style={{ marginHorizontal: 15 }}
+            style={{}}
           />
         </View>
       ) : (
@@ -58,6 +59,7 @@ const Addtocart = ({ customcart, bagsize, carttext, dealId }) => {
               color: "white",
               fontWeight: 500,
               fontSize: carttext,
+              marginRight: 10,
             }}
           >
             Add to Bag
@@ -66,7 +68,7 @@ const Addtocart = ({ customcart, bagsize, carttext, dealId }) => {
             name="bag-handle-outline"
             size={bagsize}
             color="white"
-            style={{ marginHorizontal: 15 }}
+            style={{}}
           />
         </View>
       )}

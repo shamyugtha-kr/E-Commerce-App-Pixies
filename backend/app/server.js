@@ -17,11 +17,7 @@ app.use(cors());
 
 // MongoDB Connection
 mongoose.connect(
-  "mongodb+srv://shamyugtha_kr:Shamyu123***@react-native-app.uq9j6wv.mongodb.net/?retryWrites=true&w=majority&appName=react-native-app",
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  }
+  "mongodb+srv://shamyugtha_kr:Shamyu123***@react-native-app.uq9j6wv.mongodb.net/?retryWrites=true&w=majority&appName=react-native-app"
 );
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
@@ -32,6 +28,8 @@ const UserSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true },
   password: { type: String, required: true },
+  phoneNumber: { type: String },
+  age: { type: String },
 });
 const User = mongoose.model("User", UserSchema);
 const transporter = nodemailer.createTransport({
@@ -101,6 +99,22 @@ app.post("/login", async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).send("Server error");
+  }
+});
+app.post("/update-user-data", async (req, res) => {
+  try {
+    const { email, name, phoneNumber, age } = req.body;
+    const updatedUser = await User.findOneAndUpdate(
+      { email },
+      { name: name, phoneNumber: phoneNumber, age: age },
+      { new: true }
+    );
+    if (!updatedUser) {
+      res.status(401).send("User Not Found");
+    }
+    res.status(201).send("User Updated");
+  } catch (err) {
+    console.error(err);
   }
 });
 

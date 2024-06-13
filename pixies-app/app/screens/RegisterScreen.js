@@ -31,11 +31,14 @@ const RegisterScreen = () => {
         { name, email, password },
         { abortEarly: false }
       );
-      const response = await axios.post(`http://192.168.1.7:3000/register`, {
-        name: name,
-        email: email,
-        password: password,
-      });
+      const response = await axios.post(
+        `http://192.168.118.203:3000/register`,
+        {
+          name: name,
+          email: email,
+          password: password,
+        }
+      );
       const { verificationcode } = response.data;
 
       navigation.navigate("Verify", {
